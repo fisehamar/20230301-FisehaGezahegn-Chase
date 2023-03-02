@@ -22,6 +22,8 @@
 		1B4A5AEE29B07BA100CD4F67 /* FiveDayForecastModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4A5AED29B07BA100CD4F67 /* FiveDayForecastModelTests.swift */; };
 		1B4A5AF229B07C0900CD4F67 /* FiveDayForecastJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B4A5AF129B07C0900CD4F67 /* FiveDayForecastJSON.json */; };
 		1B4A5AF429B0804000CD4F67 /* InvalidFiveDayForecastJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B4A5AF329B0804000CD4F67 /* InvalidFiveDayForecastJSON.json */; };
+		1B4A5AF629B0988500CD4F67 /* FiveDayForecastService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4A5AF529B0988500CD4F67 /* FiveDayForecastService.swift */; };
+		1B4A5AF829B098AA00CD4F67 /* GeocodingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4A5AF729B098AA00CD4F67 /* GeocodingService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		1B4A5AED29B07BA100CD4F67 /* FiveDayForecastModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveDayForecastModelTests.swift; sourceTree = "<group>"; };
 		1B4A5AF129B07C0900CD4F67 /* FiveDayForecastJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FiveDayForecastJSON.json; sourceTree = "<group>"; };
 		1B4A5AF329B0804000CD4F67 /* InvalidFiveDayForecastJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = InvalidFiveDayForecastJSON.json; sourceTree = "<group>"; };
+		1B4A5AF529B0988500CD4F67 /* FiveDayForecastService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveDayForecastService.swift; sourceTree = "<group>"; };
+		1B4A5AF729B098AA00CD4F67 /* GeocodingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodingService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +156,8 @@
 			isa = PBXGroup;
 			children = (
 				1B4A5ADA29B04EE400CD4F67 /* NetworkService.swift */,
+				1B4A5AF529B0988500CD4F67 /* FiveDayForecastService.swift */,
+				1B4A5AF729B098AA00CD4F67 /* GeocodingService.swift */,
 			);
 			path = NetworkLayer;
 			sourceTree = "<group>";
@@ -283,8 +289,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B4A5AAD29B0426C00CD4F67 /* SearchPageView.swift in Sources */,
+				1B4A5AF829B098AA00CD4F67 /* GeocodingService.swift in Sources */,
 				1B4A5AD829B04C7300CD4F67 /* SearchPageViewModel.swift in Sources */,
 				1B4A5ADB29B04EE400CD4F67 /* NetworkService.swift in Sources */,
+				1B4A5AF629B0988500CD4F67 /* FiveDayForecastService.swift in Sources */,
 				1B4A5AAB29B0426C00CD4F67 /* WeatherAppApp.swift in Sources */,
 				1B4A5ADE29B06B3000CD4F67 /* FiveDayForecastModel.swift in Sources */,
 				1B4A5AE029B06B4800CD4F67 /* GeocodingCityModel.swift in Sources */,
