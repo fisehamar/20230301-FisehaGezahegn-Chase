@@ -56,7 +56,8 @@ extension NetworkService {
     func getWeather(from city: String,
                     failureCompletion: @escaping (String) -> Void,
                     successCompletion: @escaping (CurrentWeatherModel) -> Void) {
-        call(GeocodingService(city))
+        let encodedCity = city.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        call(GeocodingService(encodedCity))
             .handleEvents(receiveSubscription: { subscription in
                 print(subscription)
             })

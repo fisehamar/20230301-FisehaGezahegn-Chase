@@ -56,7 +56,7 @@ struct SearchPageView: View {
         }
     }
     
-    /// The view with the text filed and search button.
+    /// The view with the text field and search button.
     /// if given more time, this would be better encapsulated with a delegate for the action for reusability.
     @ViewBuilder private var searchView: some View {
         HStack {
