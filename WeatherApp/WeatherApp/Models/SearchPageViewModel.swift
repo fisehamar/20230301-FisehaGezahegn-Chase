@@ -5,11 +5,14 @@
 //  Created by Fiseha Gezahegn on 3/1/23.
 //
 
+import Combine
 import Foundation
 
 class SearchPageViewModel {
     
     // MARK: - Properties
+    
+    var cancellables = Set<AnyCancellable>()
     
     // MARK: - Init
     
@@ -24,7 +27,34 @@ class SearchPageViewModel {
     }
     
     func searchButtonTapped(_ searchInput: String) {
-        // First, call the Geocoder API to get the latitude and longtitude
-        // Then, call the Weather API to get the weather.
+        guard let url = URL(string: "http://api.openweathermap.org/geo/1.0/direct?q=\(searchInput)&limit=1&appid=905384a19171d60e489096cae5095bd2") else { return }
+        URLSession.shared.dataTaskPublisher(for: url)
+            .map(\.data)
+            .decode(type: [GeocodingCityModel].self, decoder: JSONDecoder())
+            .compactMap { $0.first }
+            .sink(receiveCompletion: { _ in },
+                  receiveValue: { data in
+                let lat = data.lat
+                let lon = data.lon
+                guard let url = URL(string: "api.openweathermap.org/data/2.5/forecast?lat=\(lat)&lon=\(lon)&appid=905384a19171d60e489096cae5095bd2") else { return }
+                URLSession.shared.dataTaskPublisher(for: url)
+                    .map(\.data)
+                    .decode(type: <#T##Decodable.Protocol#>, decoder: JSONDecoder())
+            })
+            .store(in: &cancellables)
     }
+}
+
+struct GeocodingCityModel: Codable {
+    var lat: Double
+    var lon: Double
+}
+
+struct FiveDayForecastModel {
+    var city: FiveDayForecastCityModel
+}
+
+struct FiveDayForecastCityModel {
+    var name: String
+    var country: String
 }

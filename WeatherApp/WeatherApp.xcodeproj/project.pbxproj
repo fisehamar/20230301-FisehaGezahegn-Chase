@@ -15,6 +15,7 @@
 		1B4A5AC629B0426D00CD4F67 /* WeatherAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4A5AC529B0426D00CD4F67 /* WeatherAppUITests.swift */; };
 		1B4A5AC829B0426D00CD4F67 /* WeatherAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4A5AC729B0426D00CD4F67 /* WeatherAppUITestsLaunchTests.swift */; };
 		1B4A5AD829B04C7300CD4F67 /* SearchPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4A5AD729B04C7300CD4F67 /* SearchPageViewModel.swift */; };
+		1B4A5ADB29B04EE400CD4F67 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4A5ADA29B04EE400CD4F67 /* NetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,8 @@
 		1B4A5AC529B0426D00CD4F67 /* WeatherAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAppUITests.swift; sourceTree = "<group>"; };
 		1B4A5AC729B0426D00CD4F67 /* WeatherAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		1B4A5AD729B04C7300CD4F67 /* SearchPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageViewModel.swift; sourceTree = "<group>"; };
+		1B4A5ADA29B04EE400CD4F67 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		1B4A5ADC29B0577500CD4F67 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,9 +99,11 @@
 		1B4A5AA929B0426C00CD4F67 /* WeatherApp */ = {
 			isa = PBXGroup;
 			children = (
+				1B4A5ADC29B0577500CD4F67 /* Info.plist */,
 				1B4A5AAA29B0426C00CD4F67 /* WeatherAppApp.swift */,
 				1B4A5AD429B0427D00CD4F67 /* Screens */,
 				1B4A5AD529B0428600CD4F67 /* Models */,
+				1B4A5AD929B04E9600CD4F67 /* NetworkLayer */,
 				1B4A5AD629B0429300CD4F67 /* Resources */,
 				1B4A5AB029B0426D00CD4F67 /* Preview Content */,
 			);
@@ -152,6 +157,14 @@
 				1B4A5AAE29B0426D00CD4F67 /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		1B4A5AD929B04E9600CD4F67 /* NetworkLayer */ = {
+			isa = PBXGroup;
+			children = (
+				1B4A5ADA29B04EE400CD4F67 /* NetworkService.swift */,
+			);
+			path = NetworkLayer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -286,6 +299,7 @@
 			files = (
 				1B4A5AAD29B0426C00CD4F67 /* SearchPageView.swift in Sources */,
 				1B4A5AD829B04C7300CD4F67 /* SearchPageViewModel.swift in Sources */,
+				1B4A5ADB29B04EE400CD4F67 /* NetworkService.swift in Sources */,
 				1B4A5AAB29B0426C00CD4F67 /* WeatherAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -447,6 +461,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"WeatherApp/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WeatherApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -475,6 +490,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"WeatherApp/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WeatherApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
