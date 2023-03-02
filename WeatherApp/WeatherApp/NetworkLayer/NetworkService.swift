@@ -31,6 +31,9 @@ class NetworkService {
             return Fail(error: NSError(domain: "Invalid URL.", code: 0)).eraseToAnyPublisher()
         }
         return URLSession.shared.dataTaskPublisher(for: url)
+            .handleEvents(receiveSubscription: { subscription in
+                print(subscription)
+            })
             .receive(on: RunLoop.main)
             .catch({ error in
                 Fail(error: error).eraseToAnyPublisher()
@@ -63,14 +66,16 @@ extension NetworkService {
             } receiveValue: { [weak self] data in
                 self?.getWeather(from: data, failureCompletion: failureCompletion, successCompletion: successCompletion)
             }
-            .cancel()
-            //.store(in: &cancellables)
+            .store(in: &cancellables)
     }
     
     private func getWeather(from data: GeocodingCityModel,
                             failureCompletion: @escaping (String) -> Void,
                             successCompletion: @escaping (CurrentWeatherModel) -> Void) {
         call(CurrentWeatherService(.init(lat: data.lat, lon: data.lon)))
+            .handleEvents(receiveSubscription: { subscription in
+                print(subscription)
+            })
             .sink { [weak self] completion in
                 self?.handleFailure(completion, failureCompletion: failureCompletion)
             } receiveValue: { data in

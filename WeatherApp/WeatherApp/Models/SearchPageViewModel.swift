@@ -33,6 +33,7 @@ class SearchPageViewModel: ObservableObject {
         guard !isLoading else { return }
         
         error = nil
+        currentWeatherModel = nil
         isLoading = true
         networkService.getWeather(from: searchInput) { [weak self] error in
             self?.error = error
