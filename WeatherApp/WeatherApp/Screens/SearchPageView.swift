@@ -33,6 +33,10 @@ struct SearchPageView: View {
                     searchView
                     if let model = viewModel.currentWeatherModel {
                         CurrentWeatherView(model: model)
+                    } else {
+                        if viewModel.isLoading {
+                            ProgressView()
+                        }
                     }
                 }
             }

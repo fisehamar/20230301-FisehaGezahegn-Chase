@@ -15,6 +15,7 @@ class SearchPageViewModel: ObservableObject {
     private var networkService: NetworkService
     @Published var error: String?
     @Published var currentWeatherModel: CurrentWeatherModel?
+    @Published var isLoading: Bool = false
     
     // MARK: - Init
     
@@ -29,11 +30,16 @@ class SearchPageViewModel: ObservableObject {
     }
     
     func searchButtonTapped(_ searchInput: String) {
-        self.error = nil
-        networkService.getWeather(from: searchInput) { error in
-            self.error = error
-        } successCompletion: { forecastModel in
-            self.currentWeatherModel = forecastModel
+        guard !isLoading else { return }
+        
+        error = nil
+        isLoading = true
+        networkService.getWeather(from: searchInput) { [weak self] error in
+            self?.error = error
+            self?.isLoading = false
+        } successCompletion: { [weak self] forecastModel in
+            self?.currentWeatherModel = forecastModel
+            self?.isLoading = false
         }
     }
 }

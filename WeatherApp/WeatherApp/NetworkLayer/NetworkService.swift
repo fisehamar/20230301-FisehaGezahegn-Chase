@@ -54,13 +54,17 @@ extension NetworkService {
                     failureCompletion: @escaping (String) -> Void,
                     successCompletion: @escaping (CurrentWeatherModel) -> Void) {
         call(GeocodingService(city))
+            .handleEvents(receiveSubscription: { subscription in
+                print(subscription)
+            })
             .compactMap { $0.first }
             .sink { completion in
                 self.handleFailure(completion, failureCompletion: failureCompletion)
             } receiveValue: { [weak self] data in
                 self?.getWeather(from: data, failureCompletion: failureCompletion, successCompletion: successCompletion)
             }
-            .store(in: &cancellables)
+            .cancel()
+            //.store(in: &cancellables)
     }
     
     private func getWeather(from data: GeocodingCityModel,
