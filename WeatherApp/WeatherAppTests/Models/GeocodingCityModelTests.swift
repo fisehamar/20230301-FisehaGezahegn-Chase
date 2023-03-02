@@ -12,7 +12,7 @@ final class GeocodingCityModelTests: WeatherAppTestCase {
     
     func testModelDoesParseWhenValidJSON() {
         // Given, When
-        let response = parse("GeocodingAPI", toType: [GeocodingCityModel].self)
+        let response = parse(geocodingJson, toType: [GeocodingCityModel].self)
         // Then
         XCTAssertEqual(response?.first?.lon, -119.4432)
         XCTAssertEqual(response?.first?.lat, 36.4761)
@@ -21,7 +21,7 @@ final class GeocodingCityModelTests: WeatherAppTestCase {
     
     func testModelDoesNotParseWhenInvalidJSON() {
         // Given, When
-        let response = parse("InvalidGeocodingAPI", toType: [GeocodingCityModel].self)
+        let response = parse(invalidGeocodingJson, toType: [GeocodingCityModel].self)
         // Then
         XCTAssertNil(response)
     }

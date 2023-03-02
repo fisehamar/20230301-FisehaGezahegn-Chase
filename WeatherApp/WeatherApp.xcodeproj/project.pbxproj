@@ -16,9 +16,12 @@
 		1B4A5ADE29B06B3000CD4F67 /* FiveDayForecastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4A5ADD29B06B3000CD4F67 /* FiveDayForecastModel.swift */; };
 		1B4A5AE029B06B4800CD4F67 /* GeocodingCityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4A5ADF29B06B4800CD4F67 /* GeocodingCityModel.swift */; };
 		1B4A5AE329B0752100CD4F67 /* GeocodingCityModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4A5AE229B0752100CD4F67 /* GeocodingCityModelTests.swift */; };
-		1B4A5AE629B075C500CD4F67 /* GeocodingAPI.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B4A5AE529B075C500CD4F67 /* GeocodingAPI.json */; };
+		1B4A5AE629B075C500CD4F67 /* GeocodingJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B4A5AE529B075C500CD4F67 /* GeocodingJSON.json */; };
 		1B4A5AEA29B07A3300CD4F67 /* WeatherAppTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4A5AE929B07A3300CD4F67 /* WeatherAppTestCase.swift */; };
-		1B4A5AEC29B07A9B00CD4F67 /* InvalidGeocodingAPI.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B4A5AEB29B07A9B00CD4F67 /* InvalidGeocodingAPI.json */; };
+		1B4A5AEC29B07A9B00CD4F67 /* InvalidGeocodingJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B4A5AEB29B07A9B00CD4F67 /* InvalidGeocodingJSON.json */; };
+		1B4A5AEE29B07BA100CD4F67 /* FiveDayForecastModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4A5AED29B07BA100CD4F67 /* FiveDayForecastModelTests.swift */; };
+		1B4A5AF229B07C0900CD4F67 /* FiveDayForecastJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B4A5AF129B07C0900CD4F67 /* FiveDayForecastJSON.json */; };
+		1B4A5AF429B0804000CD4F67 /* InvalidFiveDayForecastJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B4A5AF329B0804000CD4F67 /* InvalidFiveDayForecastJSON.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,9 +47,12 @@
 		1B4A5ADD29B06B3000CD4F67 /* FiveDayForecastModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveDayForecastModel.swift; sourceTree = "<group>"; };
 		1B4A5ADF29B06B4800CD4F67 /* GeocodingCityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodingCityModel.swift; sourceTree = "<group>"; };
 		1B4A5AE229B0752100CD4F67 /* GeocodingCityModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodingCityModelTests.swift; sourceTree = "<group>"; };
-		1B4A5AE529B075C500CD4F67 /* GeocodingAPI.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GeocodingAPI.json; sourceTree = "<group>"; };
+		1B4A5AE529B075C500CD4F67 /* GeocodingJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GeocodingJSON.json; sourceTree = "<group>"; };
 		1B4A5AE929B07A3300CD4F67 /* WeatherAppTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAppTestCase.swift; sourceTree = "<group>"; };
-		1B4A5AEB29B07A9B00CD4F67 /* InvalidGeocodingAPI.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = InvalidGeocodingAPI.json; sourceTree = "<group>"; };
+		1B4A5AEB29B07A9B00CD4F67 /* InvalidGeocodingJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = InvalidGeocodingJSON.json; sourceTree = "<group>"; };
+		1B4A5AED29B07BA100CD4F67 /* FiveDayForecastModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveDayForecastModelTests.swift; sourceTree = "<group>"; };
+		1B4A5AF129B07C0900CD4F67 /* FiveDayForecastJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FiveDayForecastJSON.json; sourceTree = "<group>"; };
+		1B4A5AF329B0804000CD4F67 /* InvalidFiveDayForecastJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = InvalidFiveDayForecastJSON.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				1B4A5AE229B0752100CD4F67 /* GeocodingCityModelTests.swift */,
+				1B4A5AED29B07BA100CD4F67 /* FiveDayForecastModelTests.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -162,8 +169,10 @@
 			isa = PBXGroup;
 			children = (
 				1B4A5AE929B07A3300CD4F67 /* WeatherAppTestCase.swift */,
-				1B4A5AE529B075C500CD4F67 /* GeocodingAPI.json */,
-				1B4A5AEB29B07A9B00CD4F67 /* InvalidGeocodingAPI.json */,
+				1B4A5AE529B075C500CD4F67 /* GeocodingJSON.json */,
+				1B4A5AEB29B07A9B00CD4F67 /* InvalidGeocodingJSON.json */,
+				1B4A5AF129B07C0900CD4F67 /* FiveDayForecastJSON.json */,
+				1B4A5AF329B0804000CD4F67 /* InvalidFiveDayForecastJSON.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -259,8 +268,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B4A5AE629B075C500CD4F67 /* GeocodingAPI.json in Resources */,
-				1B4A5AEC29B07A9B00CD4F67 /* InvalidGeocodingAPI.json in Resources */,
+				1B4A5AF229B07C0900CD4F67 /* FiveDayForecastJSON.json in Resources */,
+				1B4A5AE629B075C500CD4F67 /* GeocodingJSON.json in Resources */,
+				1B4A5AF429B0804000CD4F67 /* InvalidFiveDayForecastJSON.json in Resources */,
+				1B4A5AEC29B07A9B00CD4F67 /* InvalidGeocodingJSON.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B4A5AEA29B07A3300CD4F67 /* WeatherAppTestCase.swift in Sources */,
+				1B4A5AEE29B07BA100CD4F67 /* FiveDayForecastModelTests.swift in Sources */,
 				1B4A5AE329B0752100CD4F67 /* GeocodingCityModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

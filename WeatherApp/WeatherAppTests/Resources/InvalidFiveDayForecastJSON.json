@@ -1,0 +1,16 @@
+{
+    "list": [{
+        "main": {
+            "temp": "296"
+        },
+        "weather": {
+            "main": "Rain",
+            "description": "light rain",
+            "icon": "10d"
+        }
+    }],
+    "city": {
+        "name": "Zocca",
+        "country": "IT"
+    }
+}

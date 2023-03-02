@@ -33,10 +33,10 @@ struct FiveDayForecastDayModel: Codable {
     private var weathers: [FiveDayForecastDayWeatherModel]
     
     var temperature: Double {
-        convertKelvinToFahrenheit(main.temp)
+        convertKelvinToFahrenheit(main.temp).rounded()
     }
     var weather: FiveDayForecastDayWeatherModel {
-        return weathers.first ?? FiveDayForecastDayWeatherModel(main: "", description: "", icon: "")
+        return weathers.first ?? FiveDayForecastDayWeatherModel(type: "", description: "", icon: "")
     }
     
     enum CodingKeys: String, CodingKey {
@@ -55,7 +55,13 @@ struct FiveDayForecastDayMainModel: Codable {
 }
 
 struct FiveDayForecastDayWeatherModel: Codable {
-    var main: String
+    var type: String
     var description: String
     var icon: String
+    
+    enum CodingKeys: String, CodingKey {
+    case type = "main"
+    case description
+    case icon
+    }
 }
