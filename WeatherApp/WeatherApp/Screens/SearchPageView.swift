@@ -11,9 +11,9 @@ struct SearchPageView: View {
     
     // MARK: - Properties
     
+    var viewModel: SearchPageViewModel = SearchPageViewModel()
     
-    
-    // MARK: - State
+    // MARK: - View State
     
     @State private var searchText: String = ""
     
@@ -37,15 +37,15 @@ struct SearchPageView: View {
             Image(systemName: "sparkles")
                 .imageScale(.large)
                 .foregroundColor(.indigo)
-            Text("Enter a city to get the weather.")
+            Text("Enter a city and tap the search button to get the weather.")
         }
     }
     
     @ViewBuilder private var searchView: some View {
         HStack {
-            TextField("hello world!", text: $searchText)
+            TextField("Enter a City", text: $searchText)
             Button {
-                print("Search Tapped.")
+                viewModel.searchButtonTapped(searchText)
             } label: {
                 Image(systemName: "magnifyingglass")
                     .imageScale(.large)
