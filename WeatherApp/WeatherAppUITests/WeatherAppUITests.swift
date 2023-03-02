@@ -1,13 +1,13 @@
 //
-//  _0230301_FisehaGezahegn_ChaseUITests.swift
-//  20230301-FisehaGezahegn-ChaseUITests
+//  WeatherAppUITests.swift
+//  WeatherAppUITests
 //
 //  Created by Fiseha Gezahegn on 3/1/23.
 //
 
 import XCTest
 
-final class _0230301_FisehaGezahegn_ChaseUITests: XCTestCase {
+final class WeatherAppUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

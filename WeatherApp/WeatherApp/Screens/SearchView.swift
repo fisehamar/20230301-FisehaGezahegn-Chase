@@ -1,13 +1,13 @@
 //
-//  ContentView.swift
-//  20230301-FisehaGezahegn-Chase
+//  SearchView.swift
+//  WeatherApp
 //
 //  Created by Fiseha Gezahegn on 3/1/23.
 //
 
 import SwiftUI
 
-struct WeatherSearchView: View {
+struct SearchView: View {
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -19,8 +19,8 @@ struct WeatherSearchView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        WeatherSearchView()
+        SearchView()
     }
 }

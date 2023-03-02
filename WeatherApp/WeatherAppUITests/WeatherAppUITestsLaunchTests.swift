@@ -1,13 +1,13 @@
 //
-//  _0230301_FisehaGezahegn_ChaseUITestsLaunchTests.swift
-//  20230301-FisehaGezahegn-ChaseUITests
+//  WeatherAppUITestsLaunchTests.swift
+//  WeatherAppUITests
 //
 //  Created by Fiseha Gezahegn on 3/1/23.
 //
 
 import XCTest
 
-final class _0230301_FisehaGezahegn_ChaseUITestsLaunchTests: XCTestCase {
+final class WeatherAppUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
