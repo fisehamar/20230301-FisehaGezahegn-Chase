@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import Combine
 import Foundation
 
 // Given more time, it would be better to separate this into its different responsiblities
 // rather than manage the UserDefaults and image caching.
-struct SearchCacheManager {
+class SearchCacheManager {
     
+    var cancellables = Set<AnyCancellable>()
     private let cityKey = "cityKey"
     
     /// Stores the search query into the `cityKey`.
@@ -24,20 +26,35 @@ struct SearchCacheManager {
         UserDefaults.standard.string(forKey: cityKey)
     }
     
-    func saveImage(image: UIImage, name: String) -> Bool {
-        guard let data = image.jpegData(compressionQuality: 1) ?? image.pngData() else {
-            return false
+    /// Downloads an image with the specified name and then saves it on device.
+    /// Given more time, we would want to limit the amount of images saved, but the weather icons
+    /// are very limited and small that there is hardly any size impact.
+    /// Given more time this would be refactored into NetworkService to handle the image downloads.
+    func saveImage(withName name: String) {
+        [name]
+            .publisher
+            .compactMap { URL(string: "http://openweathermap.org/img/wn/" + $0 + "@2x.png") }
+            .flatMap { URLSession.shared.dataTaskPublisher(for: $0) }
+            .compactMap { $0.data }
+            .sink { completion in
+                print(completion)
+            } receiveValue: { data in
+                guard let directory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) as URL else {
+                    return
+                }
+                do {
+                    try data.write(to: directory.appendingPathComponent("\(name).png"))
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+            .store(in: &cancellables)
+    }
+    
+    func loadImage(name: String) -> UIImage? {
+        if let directory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) {
+            return UIImage(contentsOfFile: URL(fileURLWithPath: directory.absoluteString).appendingPathComponent(name).path)
         }
-        guard let directory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) as URL else {
-            return false
-        }
-        
-        do {
-            try data.write(to: directory.appendingPathComponent("\(name).png"))
-            return true
-        } catch {
-            print(error.localizedDescription)
-            return false
-        }
+        return nil
     }
 }

@@ -11,12 +11,18 @@ struct CurrentWeatherView: View {
     
     // MARK: - Properties
     
+    private var searchCacheManager: SearchCacheManager
+    
+    // MARK: - View State
+    
     @State private var model: CurrentWeatherModel
     
     // MARK: - Init
     
-    init(model: CurrentWeatherModel) {
+    init(model: CurrentWeatherModel,
+         searchCacheManager: SearchCacheManager = SearchCacheManager()) {
         self.model = model
+        self.searchCacheManager = searchCacheManager
     }
     
     // MARK: - Views
@@ -39,7 +45,14 @@ struct CurrentWeatherView: View {
     /// The view with the image. First checks if the image has previously been downloaded.
     // Given more time, I would wrap this in its own video with its own loading indicator.
     @ViewBuilder private var imageView: some View {
-        AsyncImage(url: model.weatherIconUrl)
+        if let image = searchCacheManager.loadImage(name: model.weatherIconName) {
+            Image(uiImage: image)
+        } else {
+            AsyncImage(url: model.weatherIconUrl)
+                .onAppear {
+                    searchCacheManager.saveImage(withName: model.weatherIconName)
+                }
+        }
     }
     
     @ViewBuilder private var detailsView: some View {

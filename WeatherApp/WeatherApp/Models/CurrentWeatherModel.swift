@@ -23,8 +23,12 @@ struct CurrentWeatherModel: Codable {
         weather.first?.description ?? ""
     }
     
+    var weatherIconName: String {
+        weather.first?.icon ?? ""
+    }
+    
     var weatherIconUrl: URL? {
-        URL(string: "http://openweathermap.org/img/wn/" + (weather.first?.icon ?? "") + "@2x.png")
+        URL(string: "http://openweathermap.org/img/wn/" + weatherIconName + "@2x.png")
     }
     
     var temperature: String {
