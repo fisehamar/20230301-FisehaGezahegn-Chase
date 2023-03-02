@@ -16,11 +16,11 @@ class CurrentWeatherModelTests: WeatherAppTestCase {
         // Then
         XCTAssertEqual(response?.name, "Zocca")
         XCTAssertEqual(response?.country, "IT")
-        XCTAssertEqual(response?.humidity, "64")
-        XCTAssertEqual(response?.temperature, "298.48")
+        XCTAssertEqual(response?.humidity, "64.0")
+        XCTAssertEqual(response?.temperature, "77")
         XCTAssertEqual(response?.windSpeed, "0.62")
         XCTAssertEqual(response?.weatherType, "Rain")
         XCTAssertEqual(response?.weatherDescription, "moderate rain")
-        XCTAssertEqual(response?.weatherIcon, "10d")
+        XCTAssertEqual(response?.weatherIconUrl, URL(string: "http://openweathermap.org/img/wn/10d@2x.png"))
     }
 }

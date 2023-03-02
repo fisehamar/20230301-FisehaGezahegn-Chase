@@ -30,7 +30,7 @@ class SearchPageViewModel: ObservableObject {
     
     func onAppear() {
         // Request user permission. If user agrees, get the current location and pass the city to the getWeather(with:) method.
-        // If they DENY location, then check if there is a previously searched string and pass the city to the getWeather(with:) method..
+        // If they DENY location, use the previously stored result.
         if let previousCity = searchCacheManager.loadSearchQuery() {
             getWeather(with: previousCity)
         }
