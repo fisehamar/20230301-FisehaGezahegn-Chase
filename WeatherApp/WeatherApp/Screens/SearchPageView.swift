@@ -31,9 +31,9 @@ struct SearchPageView: View {
                 VStack(spacing: 16) {
                     headerView
                     searchView
-//                    if let data = viewModel.currentWeatherModel {
-//                        
-//                    }
+                    if let model = viewModel.currentWeatherModel {
+                        CurrentWeatherView(model: model)
+                    }
                 }
             }
             .padding(16)
