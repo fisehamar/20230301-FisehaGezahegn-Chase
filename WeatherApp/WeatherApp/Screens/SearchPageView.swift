@@ -43,6 +43,9 @@ struct SearchPageView: View {
             .padding(16)
             .navigationTitle("Weather Search")
         }
+        .onAppear {
+            viewModel.onAppear()
+        }
     }
     
     /// The view containing the instructions, search, and errors (if any).

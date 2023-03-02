@@ -26,16 +26,22 @@ class SearchPageViewModel: ObservableObject {
     // MARK: - View State
     
     func onAppear() {
-        // TODO: Show the data of the last location searched.
+        // Request user permission. If user agrees, get the current location and pass the city to the method.
+        // getWeather(with: <#T##String#>)
     }
     
     func searchButtonTapped(_ searchInput: String) {
         guard !isLoading else { return }
-        
+        getWeather(with: searchInput)
+    }
+    
+    // MARK: - Network
+    
+    private func getWeather(with city: String) {
         error = nil
         currentWeatherModel = nil
         isLoading = true
-        networkService.getWeather(from: searchInput) { [weak self] error in
+        networkService.getWeather(from: city) { [weak self] error in
             self?.error = error
             self?.isLoading = false
         } successCompletion: { [weak self] forecastModel in
