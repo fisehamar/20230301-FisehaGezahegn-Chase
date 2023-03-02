@@ -31,13 +31,7 @@ struct SearchPageView: View {
                 VStack(spacing: 16) {
                     headerView
                     searchView
-                    if let model = viewModel.currentWeatherModel {
-                        CurrentWeatherView(model: model)
-                    } else {
-                        if viewModel.isLoading {
-                            ProgressView()
-                        }
-                    }
+                    weatherView
                 }
             }
             .padding(16)
@@ -62,6 +56,8 @@ struct SearchPageView: View {
         }
     }
     
+    /// The view with the text filed and search button.
+    /// if given more time, this would be better encapsulated with a delegate for the action for reusability.
     @ViewBuilder private var searchView: some View {
         HStack {
             TextField("Enter a City", text: $searchText)
@@ -75,6 +71,17 @@ struct SearchPageView: View {
         }
         .padding(.horizontal, 8)
         .textFieldStyle(.roundedBorder)
+    }
+    
+    /// The view with the weather's information if the data is available.
+    @ViewBuilder private var weatherView: some View {
+        if let model = viewModel.currentWeatherModel {
+            CurrentWeatherView(model: model)
+        } else {
+            if viewModel.isLoading {
+                ProgressView()
+            }
+        }
     }
 }
 

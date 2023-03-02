@@ -25,8 +25,7 @@ struct CurrentWeatherView: View {
         VStack(spacing: 16) {
             Text(model.name + ", " + model.country)
                 .font(.title)
-            // Given more time, I would wrap this in its own video with its own loading indicator.
-            AsyncImage(url: model.weatherIconUrl)
+            imageView
             Text(model.temperature + "°")
                 .font(.title)
                 .foregroundColor(.indigo)
@@ -37,23 +36,29 @@ struct CurrentWeatherView: View {
         .padding(16)
     }
     
-    @ViewBuilder var detailsView: some View {
+    /// The view with the image. First checks if the image has previously been downloaded.
+    // Given more time, I would wrap this in its own video with its own loading indicator.
+    @ViewBuilder private var imageView: some View {
+        AsyncImage(url: model.weatherIconUrl)
+    }
+    
+    @ViewBuilder private var detailsView: some View {
+        detailView(icon: "drop", text: "Humidity: " + model.humidity + "%")
+        detailView(icon: "wind", text: "Speed: " + model.windSpeed + " mph")
+    }
+    
+    @ViewBuilder private func detailView(icon: String, text: String) -> some View {
         HStack {
-            Image(systemName: "drop")
+            Image(systemName: icon)
                 .imageScale(.large)
                 .foregroundColor(.indigo)
-            Text("Humidity: " + model.humidity + "%")
-                .font(.title3)
-        }
-        HStack {
-            Image(systemName: "wind")
-                .imageScale(.large)
-                .foregroundColor(.indigo)
-            Text("Speed: " + model.windSpeed + " mph")
+            Text(text)
                 .font(.title3)
         }
     }
 }
+
+// MARK: - Previews
 
 struct CurrentWeatherView_Previews: PreviewProvider {
     static var previews: some View {
