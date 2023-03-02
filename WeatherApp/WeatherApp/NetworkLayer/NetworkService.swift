@@ -31,6 +31,10 @@ class NetworkService {
             return Fail(error: NSError(domain: "Invalid URL.", code: 0)).eraseToAnyPublisher()
         }
         return URLSession.shared.dataTaskPublisher(for: url)
+            .receive(on: RunLoop.main)
+            .catch({ error in
+                Fail(error: error).eraseToAnyPublisher()
+            })
             .map(\.data)
             .decode(type: S.Output.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
@@ -51,8 +55,8 @@ extension NetworkService {
             .compactMap { $0.first }
             .sink { completion in
                 self.handleFailure(completion, failureCompletion: failureCompletion)
-            } receiveValue: { data in
-                self.getWeather(from: data, failureCompletion: failureCompletion, successCompletion: successCompletion)
+            } receiveValue: { [weak self] data in
+                self?.getWeather(from: data, failureCompletion: failureCompletion, successCompletion: successCompletion)
             }
             .store(in: &cancellables)
     }
@@ -61,8 +65,8 @@ extension NetworkService {
                             failureCompletion: @escaping (String) -> Void,
                             successCompletion: @escaping (FiveDayForecastModel) -> Void) {
         call(FiveDayForecastService(.init(lat: data.lat, lon: data.lon)))
-            .sink { completion in
-                self.handleFailure(completion, failureCompletion: failureCompletion)
+            .sink { [weak self] completion in
+                self?.handleFailure(completion, failureCompletion: failureCompletion)
             } receiveValue: { data in
                 successCompletion(data)
             }

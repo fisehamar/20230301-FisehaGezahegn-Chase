@@ -8,11 +8,13 @@
 import Combine
 import Foundation
 
-class SearchPageViewModel {
+class SearchPageViewModel: ObservableObject {
     
     // MARK: - Properties
     
     private var networkService: NetworkService
+    @Published var error: String?
+    @Published var forecastModel: FiveDayForecastModel!
     
     // MARK: - Init
     
@@ -20,17 +22,18 @@ class SearchPageViewModel {
         self.networkService = networkService
     }
     
-    // MARK: - Business
+    // MARK: - View State
     
     func onAppear() {
         // TODO: Show the data of the last location searched.
     }
     
     func searchButtonTapped(_ searchInput: String) {
+        self.error = nil
         networkService.getWeather(from: searchInput) { error in
-            // Present the error.
+            self.error = error
         } successCompletion: { forecastModel in
-            print(forecastModel)
+            self.forecastModel = forecastModel
         }
     }
 }

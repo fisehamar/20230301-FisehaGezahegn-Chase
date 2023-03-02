@@ -12,6 +12,7 @@ struct FiveDayForecastServiceInput {
     var lon: Double
 }
 
+/// The service to get the 5-Day Forecast that also manages the query values and response types.
 struct FiveDayForecastService: Service {
     
     typealias Input = FiveDayForecastServiceInput

@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// The service to get the geocoding that also manages the query values and response types.
 struct GeocodingService: Service {
     
     typealias Input = String

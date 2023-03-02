@@ -11,7 +11,7 @@ struct SearchPageView: View {
     
     // MARK: - Properties
     
-    var viewModel: SearchPageViewModel = SearchPageViewModel()
+    @ObservedObject var viewModel: SearchPageViewModel = SearchPageViewModel()
     
     // MARK: - View State
     
@@ -23,7 +23,7 @@ struct SearchPageView: View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 16) {
-                    instructionsView
+                    headerView
                     searchView
                 }
             }
@@ -32,12 +32,17 @@ struct SearchPageView: View {
         }
     }
     
-    @ViewBuilder private var instructionsView: some View {
+    /// The view containing the instructions, search, and errors (if any).
+    @ViewBuilder private var headerView: some View {
         HStack {
             Image(systemName: "sparkles")
                 .imageScale(.large)
                 .foregroundColor(.indigo)
             Text("Enter a city and tap the search button to get the weather.")
+        }
+        if let error = viewModel.error {
+            Text(error)
+                .foregroundColor(.red)
         }
     }
     
