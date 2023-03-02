@@ -12,7 +12,6 @@ class SearchPageViewModel {
     
     // MARK: - Properties
     
-    var cancellables = Set<AnyCancellable>()
     private var networkService: NetworkService
     
     // MARK: - Init
@@ -28,6 +27,10 @@ class SearchPageViewModel {
     }
     
     func searchButtonTapped(_ searchInput: String) {
-        
+        networkService.getWeather(from: searchInput) { error in
+            // Present the error.
+        } successCompletion: { forecastModel in
+            print(forecastModel)
+        }
     }
 }
