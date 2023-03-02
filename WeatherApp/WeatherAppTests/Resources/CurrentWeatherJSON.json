@@ -1,0 +1,18 @@
+{
+    "weather": [{
+        "main": "Rain",
+        "description": "moderate rain",
+        "icon": "10d"
+    }],
+    "main": {
+        "temp": 298.48,
+        "humidity": 64
+    },
+    "wind": {
+        "speed": 0.62
+    },
+    "sys": {
+        "country": "IT"
+    },
+    "name": "Zocca"
+}

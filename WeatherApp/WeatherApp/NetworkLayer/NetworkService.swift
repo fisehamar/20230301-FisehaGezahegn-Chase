@@ -45,12 +45,14 @@ class NetworkService {
     }
 }
 
+/// For convenience. If I had more time, I would probabl encapsulate these requests/services into a separate
+/// model instead of extending `NetworkService`.
 extension NetworkService {
     
     /// A convenience method to retrieve the weather data in a single call.
     func getWeather(from city: String,
                     failureCompletion: @escaping (String) -> Void,
-                    successCompletion: @escaping (FiveDayForecastModel) -> Void) {
+                    successCompletion: @escaping (CurrentWeatherModel) -> Void) {
         call(GeocodingService(city))
             .compactMap { $0.first }
             .sink { completion in
@@ -63,8 +65,8 @@ extension NetworkService {
     
     private func getWeather(from data: GeocodingCityModel,
                             failureCompletion: @escaping (String) -> Void,
-                            successCompletion: @escaping (FiveDayForecastModel) -> Void) {
-        call(FiveDayForecastService(.init(lat: data.lat, lon: data.lon)))
+                            successCompletion: @escaping (CurrentWeatherModel) -> Void) {
+        call(CurrentWeatherService(.init(lat: data.lat, lon: data.lon)))
             .sink { [weak self] completion in
                 self?.handleFailure(completion, failureCompletion: failureCompletion)
             } receiveValue: { data in

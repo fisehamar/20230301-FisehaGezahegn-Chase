@@ -11,11 +11,17 @@ struct SearchPageView: View {
     
     // MARK: - Properties
     
-    @ObservedObject var viewModel: SearchPageViewModel = SearchPageViewModel()
+    @ObservedObject var viewModel: SearchPageViewModel
     
     // MARK: - View State
     
     @State private var searchText: String = ""
+    
+    // MARK: - Init
+    
+    init(viewModel: SearchPageViewModel = SearchPageViewModel()) {
+        self.viewModel = viewModel
+    }
     
     // MARK: - Views
     
@@ -25,6 +31,9 @@ struct SearchPageView: View {
                 VStack(spacing: 16) {
                     headerView
                     searchView
+//                    if let data = viewModel.currentWeatherModel {
+//                        
+//                    }
                 }
             }
             .padding(16)
@@ -65,7 +74,14 @@ struct SearchPageView: View {
 // MARK: - Previews
 
 struct SearchView_Previews: PreviewProvider {
+    
+    static var viewModel: SearchPageViewModel {
+        let model = SearchPageViewModel()
+        model.currentWeatherModel = CurrentWeatherModel.fixture
+        return model
+    }
+    
     static var previews: some View {
-        SearchPageView()
+        SearchPageView(viewModel: viewModel)
     }
 }

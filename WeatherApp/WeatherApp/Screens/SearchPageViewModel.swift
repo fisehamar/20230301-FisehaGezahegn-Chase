@@ -14,7 +14,7 @@ class SearchPageViewModel: ObservableObject {
     
     private var networkService: NetworkService
     @Published var error: String?
-    @Published var forecastModel: FiveDayForecastModel!
+    @Published var currentWeatherModel: CurrentWeatherModel?
     
     // MARK: - Init
     
@@ -33,7 +33,7 @@ class SearchPageViewModel: ObservableObject {
         networkService.getWeather(from: searchInput) { error in
             self.error = error
         } successCompletion: { forecastModel in
-            self.forecastModel = forecastModel
+            self.currentWeatherModel = forecastModel
         }
     }
 }
