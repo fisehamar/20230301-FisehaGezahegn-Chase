@@ -36,25 +36,16 @@ class SearchPageViewModel {
                   receiveValue: { data in
                 let lat = data.lat
                 let lon = data.lon
-                guard let url = URL(string: "api.openweathermap.org/data/2.5/forecast?lat=\(lat)&lon=\(lon)&appid=905384a19171d60e489096cae5095bd2") else { return }
+                guard let url = URL(string: "http://api.openweathermap.org/data/2.5/forecast?lat=\(lat)&lon=\(lon)&appid=905384a19171d60e489096cae5095bd2") else { return }
                 URLSession.shared.dataTaskPublisher(for: url)
                     .map(\.data)
-                    .decode(type: <#T##Decodable.Protocol#>, decoder: JSONDecoder())
+                    .decode(type: FiveDayForecastModel.self, decoder: JSONDecoder())
+                    .sink(receiveCompletion: { _ in },
+                          receiveValue: { data in
+                        print(data)
+                    })
+                    .store(in: &self.cancellables)
             })
             .store(in: &cancellables)
     }
-}
-
-struct GeocodingCityModel: Codable {
-    var lat: Double
-    var lon: Double
-}
-
-struct FiveDayForecastModel {
-    var city: FiveDayForecastCityModel
-}
-
-struct FiveDayForecastCityModel {
-    var name: String
-    var country: String
 }
