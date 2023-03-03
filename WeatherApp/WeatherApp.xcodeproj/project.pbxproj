@@ -29,6 +29,7 @@
 		1B4A5B0B29B1B35700CD4F67 /* LocationPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4A5B0A29B1B35700CD4F67 /* LocationPermission.swift */; };
 		1B4A5B1029B1C5BF00CD4F67 /* InvalidCurrentWeatherJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B4A5B0F29B1C5BF00CD4F67 /* InvalidCurrentWeatherJSON.json */; };
 		1B4A5B1229B1C61400CD4F67 /* SearchPageViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4A5B1129B1C61400CD4F67 /* SearchPageViewModelTests.swift */; };
+		1B4A5B1429B1CBAD00CD4F67 /* Sun.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B4A5B1329B1CBAD00CD4F67 /* Sun.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		1B4A5B0A29B1B35700CD4F67 /* LocationPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPermission.swift; sourceTree = "<group>"; };
 		1B4A5B0F29B1C5BF00CD4F67 /* InvalidCurrentWeatherJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = InvalidCurrentWeatherJSON.json; sourceTree = "<group>"; };
 		1B4A5B1129B1C61400CD4F67 /* SearchPageViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageViewModelTests.swift; sourceTree = "<group>"; };
+		1B4A5B1329B1CBAD00CD4F67 /* Sun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sun.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,7 +136,7 @@
 				1B4A5AE129B074FF00CD4F67 /* Models */,
 				1B4A5B0E29B1C58C00CD4F67 /* NetworkLayer */,
 				1B4A5B0529B199EE00CD4F67 /* Resources */,
-				1B4A5AE429B075A300CD4F67 /* Utilities */,
+				1B4A5AE429B075A300CD4F67 /* TestsUtilities */,
 			);
 			path = WeatherAppTests;
 			sourceTree = "<group>";
@@ -183,16 +185,13 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		1B4A5AE429B075A300CD4F67 /* Utilities */ = {
+		1B4A5AE429B075A300CD4F67 /* TestsUtilities */ = {
 			isa = PBXGroup;
 			children = (
 				1B4A5AE929B07A3300CD4F67 /* WeatherAppTestCase.swift */,
-				1B4A5AE529B075C500CD4F67 /* GeocodingJSON.json */,
-				1B4A5AEB29B07A9B00CD4F67 /* InvalidGeocodingJSON.json */,
-				1B4A5AFB29B0B15D00CD4F67 /* CurrentWeatherJSON.json */,
-				1B4A5B0F29B1C5BF00CD4F67 /* InvalidCurrentWeatherJSON.json */,
+				1B4A5B1529B1CBC600CD4F67 /* Resources */,
 			);
-			path = Utilities;
+			path = TestsUtilities;
 			sourceTree = "<group>";
 		};
 		1B4A5AFF29B0B64500CD4F67 /* Views */ = {
@@ -236,6 +235,18 @@
 				1B4A5AFD29B0B21500CD4F67 /* CurrentWeatherModelTests.swift */,
 			);
 			path = NetworkLayer;
+			sourceTree = "<group>";
+		};
+		1B4A5B1529B1CBC600CD4F67 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1B4A5B1329B1CBAD00CD4F67 /* Sun.png */,
+				1B4A5AE529B075C500CD4F67 /* GeocodingJSON.json */,
+				1B4A5AEB29B07A9B00CD4F67 /* InvalidGeocodingJSON.json */,
+				1B4A5AFB29B0B15D00CD4F67 /* CurrentWeatherJSON.json */,
+				1B4A5B0F29B1C5BF00CD4F67 /* InvalidCurrentWeatherJSON.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -332,6 +343,7 @@
 				1B4A5AE629B075C500CD4F67 /* GeocodingJSON.json in Resources */,
 				1B4A5B1029B1C5BF00CD4F67 /* InvalidCurrentWeatherJSON.json in Resources */,
 				1B4A5AFC29B0B15D00CD4F67 /* CurrentWeatherJSON.json in Resources */,
+				1B4A5B1429B1CBAD00CD4F67 /* Sun.png in Resources */,
 				1B4A5AEC29B07A9B00CD4F67 /* InvalidGeocodingJSON.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

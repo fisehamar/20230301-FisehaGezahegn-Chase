@@ -8,6 +8,6 @@
 import XCTest
 @testable import WeatherApp
 
-final class SearchPageViewModelTests: XCTestCase {
+final class SearchPageViewModelTests: WeatherAppTestCase {
     
 }

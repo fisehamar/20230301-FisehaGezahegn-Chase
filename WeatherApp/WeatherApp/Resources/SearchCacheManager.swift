@@ -14,7 +14,7 @@ import Foundation
 class SearchCacheManager {
     
     var cancellables = Set<AnyCancellable>()
-    private let cityKey = "cityKey"
+    let cityKey = "cityKey"
     
     /// Stores the search query into the `cityKey`.
     func saveSearchQuery(_ city: String) {
@@ -29,7 +29,8 @@ class SearchCacheManager {
     /// Downloads an image with the specified name and then saves it on device.
     /// Given more time, we would want to limit the amount of images saved, but the weather icons
     /// are very limited and small that there is hardly any size impact.
-    /// Given more time this would be refactored into NetworkService to handle the image downloads.
+    /// Given more time this would be refactored into NetworkService to handle the image downloads
+    /// and make it easier to mock in unit tests.
     func saveImage(withName name: String) {
         [name]
             .publisher
@@ -39,12 +40,7 @@ class SearchCacheManager {
             .sink { completion in
                 print(completion)
             } receiveValue: { [weak self] data in
-                guard let directory = self?.getLocalDirectory() else { return }
-                do {
-                    try data.write(to: directory.appendingPathComponent("\(name).png"))
-                } catch {
-                    print(error.localizedDescription)
-                }
+                self?.saveImage(data: data, withName: name)
             }
             .store(in: &cancellables)
     }
@@ -54,6 +50,14 @@ class SearchCacheManager {
             return UIImage(contentsOfFile: URL(fileURLWithPath: directory.absoluteString).appendingPathComponent(name).path)
         }
         return nil
+    }
+    
+    // Returns the path where the image was saved (optional).
+    @discardableResult func saveImage(data: Data, withName name: String) -> String {
+        guard let directory = getLocalDirectory() else { return "" }
+        let url = directory.appendingPathComponent("\(name).png")
+        try? data.write(to: url)
+        return url.absoluteString
     }
     
     private func getLocalDirectory() -> URL? {
