@@ -56,6 +56,7 @@ class LocationPermission: NSObject, ObservableObject, CLLocationManagerDelegate 
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        // Not Implemented
+        // We are not currently worried about any location errors as it's not a must for the
+        // app to work.
     }
 }

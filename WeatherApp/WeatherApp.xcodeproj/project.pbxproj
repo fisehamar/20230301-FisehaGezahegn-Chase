@@ -134,8 +134,8 @@
 			isa = PBXGroup;
 			children = (
 				1B4A5AE129B074FF00CD4F67 /* Models */,
-				1B4A5B0E29B1C58C00CD4F67 /* NetworkLayer */,
 				1B4A5B0529B199EE00CD4F67 /* Resources */,
+				1B4A5B0E29B1C58C00CD4F67 /* NetworkLayer */,
 				1B4A5AE429B075A300CD4F67 /* TestsUtilities */,
 			);
 			path = WeatherAppTests;

@@ -7,6 +7,7 @@
 
 import XCTest
 
+/// For unit test convenience.
 class WeatherAppTestCase: XCTestCase {
     
     let geocodingJson = "GeocodingJSON"
