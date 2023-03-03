@@ -14,7 +14,7 @@ class LocationPermission: NSObject, ObservableObject, CLLocationManagerDelegate 
     
     // MARK: - Properties
     
-    var locationManager: CLLocationManager?
+    var locationManager: CLLocationManager!
     @Published var coordinates: (lat: Double, lon: Double)?
     
     // MARK: - Init
@@ -22,20 +22,20 @@ class LocationPermission: NSObject, ObservableObject, CLLocationManagerDelegate 
     override init() {
         super.init()
         locationManager = CLLocationManager()
-        locationManager?.delegate = self
+        locationManager.delegate = self
     }
     
     // MARK: - Methods
     
     /// Requests location permission if it doesn't have any yet.
     func requestPermission() {
-        if locationManager?.authorizationStatus != .authorizedWhenInUse {
-            locationManager?.requestWhenInUseAuthorization()
+        if locationManager.authorizationStatus != .authorizedWhenInUse {
+            locationManager.requestWhenInUseAuthorization()
         }
     }
     
     func isPermissionGranted() -> Bool {
-        switch locationManager?.authorizationStatus {
+        switch locationManager.authorizationStatus {
         case .authorizedWhenInUse: return true
         default: return false
         }
