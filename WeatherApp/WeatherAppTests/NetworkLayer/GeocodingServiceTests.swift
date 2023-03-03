@@ -9,14 +9,14 @@ import Combine
 import XCTest
 @testable import WeatherApp
 
-final class GeocodingServiceTests: XCTestCase {
+final class GeocodingServiceTests: WeatherAppTestCase {
     
     // MARK: - Properties
     
     private let citySpaceName = "St. Louis"
     
     // MARK: - Unit Tests
-
+    
     func testUrlIsEncodedWhenSpaceInCity() {
         // Given
         let service = GeocodingService(citySpaceName)
