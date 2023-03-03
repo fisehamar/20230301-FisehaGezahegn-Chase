@@ -16,6 +16,8 @@ class SearchPageViewModel: ObservableObject {
     
     private var networkService: NetworkService
     private var searchCacheManager: SearchCacheManager
+    var locationPermission: LocationPermission?
+    
     @Published var error: String?
     @Published var currentWeatherModel: CurrentWeatherModel?
     @Published var isLoading: Bool = false
@@ -31,7 +33,9 @@ class SearchPageViewModel: ObservableObject {
     // MARK: - View State
     
     func onAppear() {
-        if let previousCity = searchCacheManager.loadSearchQuery() {
+        // If the permission has been given, don't download the last search.
+        if locationPermission?.isPermissionGranted() == false,
+           let previousCity = searchCacheManager.loadSearchQuery() {
             getWeather(with: previousCity)
         }
     }
@@ -40,6 +44,26 @@ class SearchPageViewModel: ObservableObject {
         guard !isLoading else { return }
         searchCacheManager.saveSearchQuery(searchInput)
         getWeather(with: searchInput)
+    }
+    
+    // MARK: - Network
+    
+    func getWeather(lat: Double, lon: Double) {
+        networkRequestStarted()
+        networkService.getWeather(from: .init(lat: lat, lon: lon)) { [weak self] error in
+            self?.networkRequestStopped(with: error)
+        } successCompletion: { [weak self] forecastModel in
+            self?.networkRequestSuccessful(data: forecastModel)
+        }
+    }
+    
+    private func getWeather(with city: String) {
+        networkRequestStarted()
+        networkService.getWeather(from: city) { [weak self] error in
+            self?.networkRequestStopped(with: error)
+        } successCompletion: { [weak self] forecastModel in
+            self?.networkRequestSuccessful(data: forecastModel)
+        }
     }
     
     private func networkRequestStarted() {
@@ -53,25 +77,8 @@ class SearchPageViewModel: ObservableObject {
         isLoading = false
     }
     
-    // MARK: - Network
-    
-    func getWeather(lat: Double, lon: Double) {
-        networkRequestStarted()
-        networkService.getWeather(from: .init(lat: lat, lon: lon)) { [weak self] error in
-            self?.networkRequestStopped(with: error)
-        } successCompletion: { [weak self] forecastModel in
-            self?.currentWeatherModel = forecastModel
-            self?.isLoading = false
-        }
-    }
-    
-    private func getWeather(with city: String) {
-        networkRequestStarted()
-        networkService.getWeather(from: city) { [weak self] error in
-            self?.networkRequestStopped(with: error)
-        } successCompletion: { [weak self] forecastModel in
-            self?.currentWeatherModel = forecastModel
-            self?.isLoading = false
-        }
+    private func networkRequestSuccessful(data: CurrentWeatherModel) {
+        currentWeatherModel = data
+        isLoading = false
     }
 }

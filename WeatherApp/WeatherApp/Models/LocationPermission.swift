@@ -8,13 +8,14 @@
 import CoreLocation
 import Foundation
 
-/// Manages the location permission request and lifecycle.
+/// Manages the location permission request and lifecycle. Use the publisher `coordinates` property
+/// to automatically update any view that uses this class.
 class LocationPermission: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     // MARK: - Properties
     
-    private var locationManager: CLLocationManager?
-    @Published var coordinates: (lat: Double, lon: Double) = (0, 0)
+    var locationManager: CLLocationManager?
+    @Published var coordinates: (lat: Double, lon: Double)?
     
     // MARK: - Init
     
@@ -33,19 +34,28 @@ class LocationPermission: NSObject, ObservableObject, CLLocationManagerDelegate 
         }
     }
     
+    func isPermissionGranted() -> Bool {
+        switch locationManager?.authorizationStatus {
+        case .authorizedWhenInUse: return true
+        default: return false
+        }
+    }
+    
     // MARK: - Protocol Methods
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
-        case .authorizedWhenInUse:
-            locationManager?.requestLocation()
-        default:
-            break
+        case .authorizedWhenInUse: locationManager?.requestLocation()
+        default: break
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let coordinates = manager.location?.coordinate else { return }
         self.coordinates = (coordinates.latitude, coordinates.longitude)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        // Not Implemented
     }
 }
