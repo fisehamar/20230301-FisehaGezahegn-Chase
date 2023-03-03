@@ -63,4 +63,43 @@ class NetworkService {
     private func getFullUrl(service: String) -> String {
         return domain + service + appIdQuery
     }
+    
+    // MARK: - Service Calls
+    // If given more time, I would not include the services here, but encapsulate them elsewhere.
+    // The reason I put them in here is for convenience use and also ease of use in faster unit testing
+    // by overriding the methods. Otherwise a better approach would be to use protocols and then
+    // in the unit tests assign the values we want, but we would have to rewrite some of the NetworkLayer.
+    
+    /// A convenience method to retrieve the weather data in a single call using the city.
+    func getWeather(from city: String,
+                    failureCompletion: @escaping (String) -> Void,
+                    successCompletion: @escaping (CurrentWeatherModel) -> Void) {
+        call(GeocodingService(city))
+            .handleEvents(receiveSubscription: { subscription in
+                print(subscription)
+            })
+            .compactMap { $0.first }
+            .sink { completion in
+                self.handleFailure(completion, failureCompletion: failureCompletion)
+            } receiveValue: { [weak self] data in
+                self?.getWeather(from: data, failureCompletion: failureCompletion, successCompletion: successCompletion)
+            }
+            .store(in: &cancellables)
+    }
+    
+    /// A convenience method to retrieve the weather data using coordinates.
+    func getWeather(from data: GeocodingCityModel,
+                    failureCompletion: @escaping (String) -> Void,
+                    successCompletion: @escaping (CurrentWeatherModel) -> Void) {
+        call(CurrentWeatherService(.init(lat: data.lat, lon: data.lon)))
+            .handleEvents(receiveSubscription: { subscription in
+                print(subscription)
+            })
+            .sink { [weak self] completion in
+                self?.handleFailure(completion, failureCompletion: failureCompletion)
+            } receiveValue: { data in
+                successCompletion(data)
+            }
+            .store(in: &cancellables)
+    }
 }

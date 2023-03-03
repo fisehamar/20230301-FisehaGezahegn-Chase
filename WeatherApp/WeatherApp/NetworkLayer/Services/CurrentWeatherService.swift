@@ -29,23 +29,3 @@ struct CurrentWeatherService: Service {
         lon = input.lon
     }
 }
-
-// Given more time, I would probably not extend it but instead encapuslate it into the service
-// but doing this for network convenience.
-extension NetworkService {
-    /// A convenience method to retrieve the weather data using coordinates.
-    func getWeather(from data: GeocodingCityModel,
-                    failureCompletion: @escaping (String) -> Void,
-                    successCompletion: @escaping (CurrentWeatherModel) -> Void) {
-        call(CurrentWeatherService(.init(lat: data.lat, lon: data.lon)))
-            .handleEvents(receiveSubscription: { subscription in
-                print(subscription)
-            })
-            .sink { [weak self] completion in
-                self?.handleFailure(completion, failureCompletion: failureCompletion)
-            } receiveValue: { data in
-                successCompletion(data)
-            }
-            .store(in: &cancellables)
-    }
-}

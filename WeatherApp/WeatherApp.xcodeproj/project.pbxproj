@@ -30,6 +30,7 @@
 		1B4A5B1029B1C5BF00CD4F67 /* InvalidCurrentWeatherJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B4A5B0F29B1C5BF00CD4F67 /* InvalidCurrentWeatherJSON.json */; };
 		1B4A5B1229B1C61400CD4F67 /* SearchPageViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4A5B1129B1C61400CD4F67 /* SearchPageViewModelTests.swift */; };
 		1B4A5B1429B1CBAD00CD4F67 /* Sun.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B4A5B1329B1CBAD00CD4F67 /* Sun.png */; };
+		1B4A5B1929B1D22300CD4F67 /* GeocodingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4A5B1829B1D22300CD4F67 /* GeocodingServiceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		1B4A5B0F29B1C5BF00CD4F67 /* InvalidCurrentWeatherJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = InvalidCurrentWeatherJSON.json; sourceTree = "<group>"; };
 		1B4A5B1129B1C61400CD4F67 /* SearchPageViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageViewModelTests.swift; sourceTree = "<group>"; };
 		1B4A5B1329B1CBAD00CD4F67 /* Sun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sun.png; sourceTree = "<group>"; };
+		1B4A5B1829B1D22300CD4F67 /* GeocodingServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodingServiceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,8 +136,8 @@
 			isa = PBXGroup;
 			children = (
 				1B4A5AE129B074FF00CD4F67 /* Models */,
-				1B4A5B0529B199EE00CD4F67 /* Resources */,
 				1B4A5B0E29B1C58C00CD4F67 /* NetworkLayer */,
+				1B4A5B0529B199EE00CD4F67 /* Resources */,
 				1B4A5AE429B075A300CD4F67 /* TestsUtilities */,
 			);
 			path = WeatherAppTests;
@@ -231,6 +233,7 @@
 		1B4A5B0E29B1C58C00CD4F67 /* NetworkLayer */ = {
 			isa = PBXGroup;
 			children = (
+				1B4A5B1829B1D22300CD4F67 /* GeocodingServiceTests.swift */,
 				1B4A5AE229B0752100CD4F67 /* GeocodingCityModelTests.swift */,
 				1B4A5AFD29B0B21500CD4F67 /* CurrentWeatherModelTests.swift */,
 			);
@@ -374,6 +377,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B4A5B0929B19A3B00CD4F67 /* SearchCacheManagerTests.swift in Sources */,
+				1B4A5B1929B1D22300CD4F67 /* GeocodingServiceTests.swift in Sources */,
 				1B4A5AEA29B07A3300CD4F67 /* WeatherAppTestCase.swift in Sources */,
 				1B4A5AFE29B0B21500CD4F67 /* CurrentWeatherModelTests.swift in Sources */,
 				1B4A5AE329B0752100CD4F67 /* GeocodingCityModelTests.swift in Sources */,
