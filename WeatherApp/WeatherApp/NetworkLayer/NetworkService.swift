@@ -14,6 +14,7 @@ protocol Service {
     associatedtype Input
     /// The data to handle the parsing of the returned response after the API call.
     associatedtype Output: Codable
+    /// The endpoint segment excluding the domain and app id.
     var url: String { get }
 }
 
