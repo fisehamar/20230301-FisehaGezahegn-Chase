@@ -57,10 +57,8 @@ class NetworkService {
         default: break
         }
     }
-    
-    // MARK: - Private Methods
-    
-    private func getFullUrl(service: String) -> String {
+
+    func getFullUrl(service: String) -> String {
         return domain + service + appIdQuery
     }
     

@@ -59,7 +59,7 @@ struct SearchPageView: View {
             Image(systemName: "sparkles")
                 .imageScale(.large)
                 .foregroundColor(.indigo)
-            Text("Enter a city and tap the search button to get the weather.")
+            Text("Enter a US city and tap the search button to get the weather.")
         }
         if let error = viewModel.error {
             Text(error)
@@ -71,7 +71,7 @@ struct SearchPageView: View {
     /// if given more time, this would be better encapsulated with a delegate for the action for reusability.
     @ViewBuilder private var searchView: some View {
         HStack {
-            TextField("Enter a City", text: $searchText)
+            TextField("Enter a US City", text: $searchText)
             Button {
                 viewModel.searchButtonTapped(searchText)
             } label: {
