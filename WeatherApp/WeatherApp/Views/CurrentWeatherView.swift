@@ -43,7 +43,7 @@ struct CurrentWeatherView: View {
     }
     
     /// The view with the image. First checks if the image has previously been downloaded.
-    // Given more time, I would wrap this in its own video with its own loading indicator.
+    // Given more time, I would wrap this in its own view with its own loading indicator.
     @ViewBuilder private var imageView: some View {
         if let image = searchCacheManager.loadImage(name: model.weatherIconName) {
             Image(uiImage: image)
@@ -75,6 +75,10 @@ struct CurrentWeatherView: View {
 
 struct CurrentWeatherView_Previews: PreviewProvider {
     static var previews: some View {
+        // If given more time, I would add functionality to retrieve a local image,
+        // but due to AsyncImage or directory, it downloads the image the first
+        // time but then stores it. Typically, we wouldn't want to make network calls
+        // in testing views.
         CurrentWeatherView(model: CurrentWeatherModel.fixture)
     }
 }

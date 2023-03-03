@@ -18,7 +18,7 @@ struct GeocodingService: Service {
         "/geo/1.0/direct?q=\(city)&limit=1"
     }
     
-    init(_ input: Input) {
-        city = input
+    init(_ city: Input) {
+        self.city = city
     }
 }

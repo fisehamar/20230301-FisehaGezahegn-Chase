@@ -38,10 +38,8 @@ class SearchCacheManager {
             .compactMap { $0.data }
             .sink { completion in
                 print(completion)
-            } receiveValue: { data in
-                guard let directory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) as URL else {
-                    return
-                }
+            } receiveValue: { [weak self] data in
+                guard let directory = self?.getLocalDirectory() else { return }
                 do {
                     try data.write(to: directory.appendingPathComponent("\(name).png"))
                 } catch {
@@ -52,9 +50,16 @@ class SearchCacheManager {
     }
     
     func loadImage(name: String) -> UIImage? {
-        if let directory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) {
+        if let directory = getLocalDirectory() {
             return UIImage(contentsOfFile: URL(fileURLWithPath: directory.absoluteString).appendingPathComponent(name).path)
         }
         return nil
+    }
+    
+    private func getLocalDirectory() -> URL? {
+        guard let directory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else {
+            return nil
+        }
+        return directory
     }
 }

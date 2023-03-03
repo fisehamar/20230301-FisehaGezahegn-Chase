@@ -21,6 +21,7 @@ class NetworkService {
     
     var cancellables = Set<AnyCancellable>()
     private let domain = "http://api.openweathermap.org"
+    // For convenience but if given more time, it would be better in Keychain.
     private let appIdQuery = "&appid=905384a19171d60e489096cae5095bd2"
     
     /// A generic network caller.
