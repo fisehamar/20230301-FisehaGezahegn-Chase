@@ -10,6 +10,8 @@ import Combine
 import Foundation
 
 /// The view model for a `SearchPageView` screen.
+// If there was more time, we would unit test this class as it has dependency injection capabilities.
+// But my concern was first to make its dependencies unit tested to make it easier to test this model.
 class SearchPageViewModel: ObservableObject {
     
     // MARK: - Properties

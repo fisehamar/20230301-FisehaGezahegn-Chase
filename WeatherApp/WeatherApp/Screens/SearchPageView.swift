@@ -47,8 +47,9 @@ struct SearchPageView: View {
             viewModel.onAppear()
         }
         .onReceive(locationPermission.$coordinates) { coordinates in
-            guard let coordinates = coordinates else { return }
             // Update the screen automatically using the user's location if they gave permission.
+            // This is called whenever the `locationPermission.coordinates` is assigned.
+            guard let coordinates = coordinates else { return }
             viewModel.getWeather(lat: coordinates.lat, lon: coordinates.lon)
         }
     }

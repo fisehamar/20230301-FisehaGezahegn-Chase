@@ -52,6 +52,7 @@ class LocationPermission: NSObject, ObservableObject, CLLocationManagerDelegate 
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let coordinates = manager.location?.coordinate else { return }
+        // Once these coordinates are assigned, it will notifiy all subscribers of `coordinates`.
         self.coordinates = (coordinates.latitude, coordinates.longitude)
     }
     
