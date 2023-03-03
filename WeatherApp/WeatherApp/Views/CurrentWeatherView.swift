@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// A view that displays the current weather's information with an image in the center.
 struct CurrentWeatherView: View {
     
     // MARK: - Properties

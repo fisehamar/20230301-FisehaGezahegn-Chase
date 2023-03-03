@@ -17,12 +17,17 @@ protocol Service {
     var url: String { get }
 }
 
+/// Manages and creates network requests.
 class NetworkService {
+    
+    // MARK: - Properties
     
     var cancellables = Set<AnyCancellable>()
     private let domain = "http://api.openweathermap.org"
     // For convenience but if given more time, it would be better in Keychain.
     private let appIdQuery = "&appid=905384a19171d60e489096cae5095bd2"
+    
+    // MARK: - Networking
     
     /// A generic network caller.
     /// - Parameter service: A service that conforms to `Service`.
@@ -31,6 +36,7 @@ class NetworkService {
         guard let url = URL(string: getFullUrl(service: service.url)) else {
             return Fail(error: NSError(domain: "Invalid URL.", code: 0)).eraseToAnyPublisher()
         }
+        
         return URLSession.shared.dataTaskPublisher(for: url)
             .handleEvents(receiveSubscription: { subscription in
                 print(subscription)
@@ -44,53 +50,17 @@ class NetworkService {
             .eraseToAnyPublisher()
     }
     
-    private func getFullUrl(service: String) -> String {
-        return domain + service + appIdQuery
-    }
-}
-
-/// For convenience. If I had more time, I would probabl encapsulate these requests/services into a separate
-/// model instead of extending `NetworkService`.
-extension NetworkService {
-    
-    /// A convenience method to retrieve the weather data in a single call.
-    func getWeather(from city: String,
-                    failureCompletion: @escaping (String) -> Void,
-                    successCompletion: @escaping (CurrentWeatherModel) -> Void) {
-        let encodedCity = city.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        call(GeocodingService(encodedCity))
-            .handleEvents(receiveSubscription: { subscription in
-                print(subscription)
-            })
-            .compactMap { $0.first }
-            .sink { completion in
-                self.handleFailure(completion, failureCompletion: failureCompletion)
-            } receiveValue: { [weak self] data in
-                self?.getWeather(from: data, failureCompletion: failureCompletion, successCompletion: successCompletion)
-            }
-            .store(in: &cancellables)
-    }
-    
-    private func getWeather(from data: GeocodingCityModel,
-                            failureCompletion: @escaping (String) -> Void,
-                            successCompletion: @escaping (CurrentWeatherModel) -> Void) {
-        call(CurrentWeatherService(.init(lat: data.lat, lon: data.lon)))
-            .handleEvents(receiveSubscription: { subscription in
-                print(subscription)
-            })
-            .sink { [weak self] completion in
-                self?.handleFailure(completion, failureCompletion: failureCompletion)
-            } receiveValue: { data in
-                successCompletion(data)
-            }
-            .store(in: &cancellables)
-    }
-    
-    private func handleFailure(_ completion: Subscribers.Completion<Error>,
-                               failureCompletion: @escaping (String) -> Void) {
+    func handleFailure(_ completion: Subscribers.Completion<Error>,
+                       failureCompletion: @escaping (String) -> Void) {
         switch completion {
         case .failure(let error): failureCompletion(error.localizedDescription)
         default: break
         }
+    }
+    
+    // MARK: - Private Methods
+    
+    private func getFullUrl(service: String) -> String {
+        return domain + service + appIdQuery
     }
 }

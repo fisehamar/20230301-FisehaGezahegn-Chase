@@ -7,11 +7,13 @@
 
 import SwiftUI
 
+/// The screen that contains a search bar and displays the weather information of a city.
 struct SearchPageView: View {
     
     // MARK: - Properties
     
     @ObservedObject var viewModel: SearchPageViewModel
+    @ObservedObject var locationPermission: LocationPermission
     
     // MARK: - View State
     
@@ -19,8 +21,10 @@ struct SearchPageView: View {
     
     // MARK: - Init
     
-    init(viewModel: SearchPageViewModel = SearchPageViewModel()) {
+    init(viewModel: SearchPageViewModel = SearchPageViewModel(),
+         locationPermission: LocationPermission = LocationPermission()) {
         self.viewModel = viewModel
+        self.locationPermission = locationPermission
     }
     
     // MARK: - Views
@@ -38,7 +42,12 @@ struct SearchPageView: View {
             .navigationTitle("Weather Search")
         }
         .onAppear {
+            locationPermission.requestPermission()
             viewModel.onAppear()
+        }
+        .onReceive(locationPermission.$coordinates) { coordinates in
+            // Update the screen automatically using the user's location if they gave permission.
+            viewModel.getWeather(lat: coordinates.lat, lon: coordinates.lon)
         }
     }
     

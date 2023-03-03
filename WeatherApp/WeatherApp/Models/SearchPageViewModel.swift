@@ -5,9 +5,11 @@
 //  Created by Fiseha Gezahegn on 3/1/23.
 //
 
+import CoreLocation
 import Combine
 import Foundation
 
+/// The view model for a `SearchPageView` screen.
 class SearchPageViewModel: ObservableObject {
     
     // MARK: - Properties
@@ -29,12 +31,9 @@ class SearchPageViewModel: ObservableObject {
     // MARK: - View State
     
     func onAppear() {
-        // Request user permission. If user agrees, get the current location and pass the city to the getWeather(with:) method.
-        // If they DENY location, use the previously stored result.
         if let previousCity = searchCacheManager.loadSearchQuery() {
             getWeather(with: previousCity)
         }
-        // If there is isn't anything, do nothing.
     }
     
     func searchButtonTapped(_ searchInput: String) {
@@ -43,15 +42,33 @@ class SearchPageViewModel: ObservableObject {
         getWeather(with: searchInput)
     }
     
-    // MARK: - Network
-    
-    private func getWeather(with city: String) {
+    private func networkRequestStarted() {
         error = nil
         currentWeatherModel = nil
         isLoading = true
-        networkService.getWeather(from: city) { [weak self] error in
-            self?.error = error
+    }
+    
+    private func networkRequestStopped(with error: String?) {
+        self.error = error
+        isLoading = false
+    }
+    
+    // MARK: - Network
+    
+    func getWeather(lat: Double, lon: Double) {
+        networkRequestStarted()
+        networkService.getWeather(from: .init(lat: lat, lon: lon)) { [weak self] error in
+            self?.networkRequestStopped(with: error)
+        } successCompletion: { [weak self] forecastModel in
+            self?.currentWeatherModel = forecastModel
             self?.isLoading = false
+        }
+    }
+    
+    private func getWeather(with city: String) {
+        networkRequestStarted()
+        networkService.getWeather(from: city) { [weak self] error in
+            self?.networkRequestStopped(with: error)
         } successCompletion: { [weak self] forecastModel in
             self?.currentWeatherModel = forecastModel
             self?.isLoading = false
