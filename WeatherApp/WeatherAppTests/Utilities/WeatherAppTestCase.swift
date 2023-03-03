@@ -12,6 +12,7 @@ class WeatherAppTestCase: XCTestCase {
     let geocodingJson = "GeocodingJSON"
     let invalidGeocodingJson = "InvalidGeocodingJSON"
     let currentWeatherJson = "CurrentWeatherJSON"
+    let invalidCurrentWeatherJSON = "InvalidCurrentWeatherJSON"
     
     func parse<T: Codable>(_ filename: String, toType dataType: T.Type) -> T? {
         if let url = Bundle(for: type(of: self)).url(forResource: filename, withExtension: "json"),

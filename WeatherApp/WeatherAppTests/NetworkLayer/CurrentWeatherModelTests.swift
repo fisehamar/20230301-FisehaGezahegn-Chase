@@ -23,4 +23,11 @@ class CurrentWeatherModelTests: WeatherAppTestCase {
         XCTAssertEqual(response?.weatherDescription, "moderate rain")
         XCTAssertEqual(response?.weatherIconUrl, URL(string: "http://openweathermap.org/img/wn/10d@2x.png"))
     }
+    
+    func testModelDoesNotParseWhenInvalidJSON() {
+        // Given, When
+        let response = parse(invalidCurrentWeatherJSON, toType: CurrentWeatherModel.self)
+        // Then
+        XCTAssertNil(response)
+    }
 }
